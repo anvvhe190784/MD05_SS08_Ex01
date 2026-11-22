@@ -1,0 +1,15 @@
+services:
+  github-runner:
+    image: myoung34/github-runner:latest
+    container_name: quickbite-dood-runner
+    restart: unless-stopped
+    environment:
+      - REPO_URL=https://github.com/anvvhe190784/MD05_SS08_Ex01
+      - RUNNER_NAME=quickbite-dood-runner
+      - RUNNER_TOKEN=${RUNNER_TOKEN}
+      - RUNNER_SCOPE=repo
+      - LABELS=quickbite-dood
+      - RUNNER_WORKDIR=/tmp/runner/work
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/runner:/tmp/runner

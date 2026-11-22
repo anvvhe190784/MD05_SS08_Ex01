@@ -1,0 +1,22 @@
+name: DooD Docker Verification CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker_verify:
+    runs-on: [self-hosted, quickbite-dood]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify Docker Daemon Connection
+        run: docker info
+
+      - name: Build Docker Image via DooD
+        run: |
+          docker build -t quickbite-dood-test:1.0 .
+          docker images | grep quickbite-dood-test
+          docker rmi quickbite-dood-test:1.0
